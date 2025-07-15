@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class Test001 {
 
-	@Test
+	@Test(groups={"smoke"})
 	public void googleSearch() {
 
 		WebDriverManager webDriverManager = WebDriverManager.chromedriver();

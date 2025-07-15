@@ -24,43 +24,12 @@ configurations {
 
 
 dependencies {
-    implementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
     implementation group: 'io.github.bonigarcia', name: 'webdrivermanager', version: "${webDriverManager}"
     implementation group: 'org.seleniumhq.selenium', name: 'selenium-java', version: "${seleniumJava}"
     implementation group: 'org.testng', name: 'testng', version: "${testNg}"
-    implementation 'com.aventstack:extentreports:5.1.1'
-    implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-slf4j2-impl:2.20.0'
-
-
 }
 
 test {
-    systemProperty "browser", System.getProperty("browser");
-    systemProperty "test.env", System.getProperty("test.env");
-    systemProperty "testsToRun", System.getProperty("testsToRun")
-
-    useTestNG {
-        preserveOrder true
-        outputDirectory = file("$buildDir/test-output")
-        useDefaultListeners = true
-        excludeGroups << System.getProperty("testsNotToRun").toString()
-        includeGroups << System.getProperty("testsToRun").toString();
-        options {
-            parallel = 'classes'
-            threadCount = Integer.parseInt(System.getProperty("threads", '1'))
-        }
-
-        testLogging {
-            showStandardStreams = true
-            exceptionFormat "full"
-        }
-
-        ignoreFailures = true
-    }
+    useTestNG()
+    options.suites 'src/test/resources/testng.xml'
 }
