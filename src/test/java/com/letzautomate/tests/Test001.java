@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
 public class Test001 {
@@ -13,7 +14,9 @@ public class Test001 {
 
 		WebDriverManager webDriverManager = WebDriverManager.chromedriver();
 		webDriverManager.setup();
-		WebDriver driver = new ChromeDriver();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
+		WebDriver driver = new ChromeDriver(options);
 		driver.get("https://google.com");
 		driver.findElement(By.name("q")).sendKeys("HelloWorld");
 
