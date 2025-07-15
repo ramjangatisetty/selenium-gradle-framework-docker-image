@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  chrome:
+    image: seleniarm/standalone-chromium:latest
+    container_name: chrome
+    ports:
+      - "4444:4444"
+
+  test-runner:
+    build:
+      context: .
+    container_name: testng-runner
+    depends_on:
+      - chrome
