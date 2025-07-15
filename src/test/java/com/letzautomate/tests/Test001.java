@@ -17,6 +17,7 @@ public class Test001 {
 	public void googleSearch() throws MalformedURLException {
 
 		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless", "--no-sandbox", "--disable-dev-shm-usage");
 		WebDriver driver = new RemoteWebDriver(new URL("http://chrome:4444/wd/hub"), options);
 		driver.get("https://google.com");
 		driver.findElement(By.name("q")).sendKeys("HelloWorld");
